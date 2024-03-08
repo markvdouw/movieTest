@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="movie"
+            type="com.kueski.marktest.business.model.Movie" />
+
+        <variable
+            name="clickListener"
+            type="com.kueski.marktest.ui.MovieClickListener" />
+
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="?attr/actionBarSize">
+
+        <TextView
+            android:id="@+id/movie_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="placeholder" />
+
+        <TextView
+            android:id="@+id/isFavourite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_below="@+id/movie_name"
+            android:layout_marginBottom="25dp"
+            android:text="@{movie.favouriteStatus}" />
+
+        <Button
+            android:id="@+id/mark_favourite"
+            android:layout_width="150dp"
+            android:layout_height="70dp"
+            android:onClick="@{() -> clickListener.movieClicked(movie)}"
+            android:layout_below="@+id/isFavourite"
+            android:text="Mark Favourite" />
+
+
+    </RelativeLayout>
+</layout>
