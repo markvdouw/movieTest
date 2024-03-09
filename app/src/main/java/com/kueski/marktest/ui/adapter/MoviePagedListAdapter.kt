@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.kueski.marktest.business.model.Movie
 import com.kueski.marktest.databinding.MovieListItemBinding
 
@@ -33,10 +34,13 @@ class MoviePagedListAdapter(private val movieClickListener: MovieClickListener?)
 
     class ViewHolder private constructor(private val binding: MovieListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
+        private val imageBaseUrl: String = "https://image.tmdb.org/t/p/w500"
         fun bind(item: Movie?, movieClickListener: MovieClickListener?) {
             if (item != null) {
                 binding.movie = item
             }
+
+            Glide.with(binding.root.context).load("$imageBaseUrl${item!!.poster}").into(binding.imageView);
             movieClickListener?.let { binding.clickListener = it }
         }
 

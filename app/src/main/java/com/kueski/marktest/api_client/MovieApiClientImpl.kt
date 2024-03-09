@@ -15,8 +15,8 @@ class MovieApiClientImpl(networkFactory: NetworkFactory) : MoviesApiClient {
     private val nowPlayingService = networkFactory.createService(MovieService::class.java)
 
     override suspend fun getMovieDiscovery(page: Int, sortBy: String?): MovieApiResponse =
-        movieDiscoveryService.getMovieList(page)
+        movieDiscoveryService.getMovieList(page, sortBy)
 
     override suspend fun getNowPlaying(page: Int, sortBy: String?): MovieApiResponse =
-        nowPlayingService.getNowPlayingMovies(page)
+        nowPlayingService.getNowPlayingMovies(page, sortBy = sortBy)
 }

@@ -18,6 +18,8 @@ class NowPlayingViewModel : ViewModel(), KoinComponent {
     init {
         getNowPlayingMovies()
     }
-    fun getNowPlayingMovies(sortBy: String = AdapterSortingType.NAME.sortBy): LiveData<PagingData<Movie>> =
-        moviesRepository.getNowPlayingMovies(sortBy).cachedIn(viewModelScope)
+
+    fun getNowPlayingMovies(sortBy: String = AdapterSortingType.NAME.sortBy) {
+        movieList = moviesRepository.getNowPlayingMovies(sortBy).cachedIn(viewModelScope)
+    }
 }

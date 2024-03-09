@@ -20,6 +20,8 @@ class FavouriteFragment : BaseMovieResultFragment<FavouriteMoviesViewModel>() {
             ViewModelProvider(this).get(FavouriteMoviesViewModel::class.java),
             setAdapter = false
         )
+        binding?.sort?.visibility = View.GONE
+        binding?.view?.visibility = View.GONE
         provideRecyclerView()?.let { recycler ->
             recycler.apply {
                 layoutManager = LinearLayoutManager(context)

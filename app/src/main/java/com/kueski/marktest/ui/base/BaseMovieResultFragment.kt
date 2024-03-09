@@ -48,6 +48,7 @@ abstract class BaseMovieResultFragment<VM : ViewModel> : Fragment(), MovieClickL
 
     protected fun onViewCreated(viewModel: VM, setAdapter: Boolean = true) {
         this.viewModel = viewModel
+        binding?.clickListener = this
         if (setAdapter) {
             movieListPagedAdapter = MoviePagedListAdapter(this)
             provideRecyclerView()?.let { recycler ->
@@ -94,8 +95,8 @@ abstract class BaseMovieResultFragment<VM : ViewModel> : Fragment(), MovieClickL
         }
     }
 
-    private fun changeSortingType() {
-        sortBy = if(sortBy == AdapterSortingType.NAME) {
+    protected fun changeSortingType() {
+        sortBy = if (sortBy == AdapterSortingType.NAME) {
             AdapterSortingType.DATE
         } else {
             AdapterSortingType.NAME
@@ -111,7 +112,8 @@ abstract class BaseMovieResultFragment<VM : ViewModel> : Fragment(), MovieClickL
                 LinearLayoutManager(context)
             }
             (it.adapter as MoviePagedListAdapter).setViewType(itemViewType)
-            val imageResource = if(itemViewType==AdapterViewType.GRID) R.drawable.list else R.drawable.grid
+            val imageResource =
+                if (itemViewType == AdapterViewType.GRID) R.drawable.list else R.drawable.grid
             binding?.view?.setImageResource(imageResource)
         }
     }

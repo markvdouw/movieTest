@@ -65,6 +65,8 @@ dependencies {
     implementation ("androidx.paging:paging-runtime:3.0.0-alpha03")
 //    androidTestImplementation 'org.testng:testng:7.3.0'
     kapt("androidx.room:room-compiler:2.6.1")
+
+    implementation ("com.github.bumptech.glide:glide:4.16.0")
 //    kapt ("androidx.room:room-compiler:2.6.1")
 
 //    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"

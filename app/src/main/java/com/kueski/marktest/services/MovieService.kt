@@ -10,7 +10,7 @@ interface MovieService {
     @GET("discover/movie?include_adult=false&include_video=false&language=en-US")
     suspend fun getMovieList(
         @Query("page") page: Int,
-//        @Query("sort_by") sortBy: String? = null
+        @Query("sort_by") sortBy: String? = null
     ): MovieApiResponse
 
     @GET("discover/movie?include_adult=false&include_video=false&language=en-US&with_release_type=2|3")
@@ -18,7 +18,7 @@ interface MovieService {
         @Query("page") page: Int,
         @Query("release_date.lte") maxDate: String = getNowMinus(0),
         @Query("release_date.gte") minDate: String = getNowMinus(7),
-//        @Query("sort_by") sortBy: String? = null
+        @Query("sort_by") sortBy: String? = null
     ): MovieApiResponse
 
 }

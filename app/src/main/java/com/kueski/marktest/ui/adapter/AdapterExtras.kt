@@ -5,5 +5,5 @@ enum class AdapterViewType {
 }
 
 enum class AdapterSortingType(val sortBy : String){
-    DATE("release_date.lte"), NAME("title")
+    DATE("release_date.asc"), NAME("title.asc")
 }
