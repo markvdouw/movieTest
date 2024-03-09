@@ -7,7 +7,10 @@ import com.kueski.marktest.api_client.MoviesApiClient
 import com.kueski.marktest.business.model.Movie
 
 @ExperimentalPagingApi
-class NowPlayingMoviesPagingSource(val moviesApiClient: MoviesApiClient) :
+class NowPlayingMoviesPagingSource(
+    val moviesApiClient: MoviesApiClient,
+    private val sortBy: String
+) :
     PagingSource<Int, Movie>() {
     companion object {
         private const val STARTING_PAGE = 1
@@ -16,7 +19,7 @@ class NowPlayingMoviesPagingSource(val moviesApiClient: MoviesApiClient) :
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Movie> {
         val page = params.key ?: STARTING_PAGE
         return try {
-            val response = moviesApiClient.getNowPlaying(page, null)
+            val response = moviesApiClient.getNowPlaying(page, sortBy)
             LoadResult.Page(
                 response.results.map { it.toBusiness()!! },
                 prevKey = if (page == STARTING_PAGE) null else page - 1,

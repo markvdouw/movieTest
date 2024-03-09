@@ -29,7 +29,7 @@ class FavouriteFragment : BaseMovieResultFragment<FavouriteMoviesViewModel>() {
             viewModel.movieList.let {
                 it.observe(viewLifecycleOwner) {
                     movieListAdapter.setData(it)
-                    binding?.progressBarExploreFragment?.visibility = View.GONE
+                    binding?.progress?.visibility = View.GONE
                     binding?.moviesListRecyclerView?.visibility = View.VISIBLE
                 }
             }
@@ -40,8 +40,12 @@ class FavouriteFragment : BaseMovieResultFragment<FavouriteMoviesViewModel>() {
         super.onResume()
         lifecycleScope.launch {
             viewModel.getFavouriteMovies()
-            binding?.progressBarExploreFragment?.visibility = View.VISIBLE
+            binding?.progress?.visibility = View.VISIBLE
             binding?.moviesListRecyclerView?.visibility = View.GONE
         }
+    }
+
+    override fun sort() {
+
     }
 }

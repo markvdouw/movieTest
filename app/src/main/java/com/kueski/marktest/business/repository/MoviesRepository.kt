@@ -22,15 +22,15 @@ class MoviesRepository(
     }
 
     @OptIn(ExperimentalPagingApi::class)
-    fun getMoviesDiscovery(pageSize: Int? = null): LiveData<PagingData<Movie>> {
+    fun getMoviesDiscovery(sortBy : String, pageSize: Int? = null): LiveData<PagingData<Movie>> {
         return Pager(config = getPagingConfig(pageSize),
-            pagingSourceFactory = { MovieDiscoveryPagingSource(moviesApiClient) }).liveData
+            pagingSourceFactory = { MovieDiscoveryPagingSource(moviesApiClient, sortBy) }).liveData
     }
 
     @OptIn(ExperimentalPagingApi::class)
-    fun getNowPlayingMovies(pageSize: Int? = null): LiveData<PagingData<Movie>> {
+    fun getNowPlayingMovies(sortBy: String, pageSize: Int? = null): LiveData<PagingData<Movie>> {
         return Pager(config = getPagingConfig(pageSize),
-            pagingSourceFactory = { NowPlayingMoviesPagingSource(moviesApiClient) }).liveData
+            pagingSourceFactory = { NowPlayingMoviesPagingSource(moviesApiClient, sortBy) }).liveData
     }
 
     suspend fun getFavouriteMovies(): List<Movie> =

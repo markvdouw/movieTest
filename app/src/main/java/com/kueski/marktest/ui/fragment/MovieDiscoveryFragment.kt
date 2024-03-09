@@ -11,10 +11,14 @@ class MovieDiscoveryFragment : BaseMovieResultFragment<MovieDiscoveryViewModel>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         onViewCreated(ViewModelProvider(this).get(MovieDiscoveryViewModel::class.java))
-        viewModel.movieList.let {
+        viewModel.movieList?.let {
             it.observe(viewLifecycleOwner) {
                 movieListPagedAdapter.submitData(viewLifecycleOwner.lifecycle, it)
             }
         }
+    }
+
+    override fun sort() {
+        viewModel.getMoviesDiscovery()
     }
 }

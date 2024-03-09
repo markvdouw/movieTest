@@ -67,4 +67,10 @@ class MovieDetailActivity : AppCompatActivity(), MovieClickListener {
         }
     }
 
+    override fun toggleView() {
+    }
+
+    override fun sort() {
+    }
+
 }

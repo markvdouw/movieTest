@@ -12,6 +12,8 @@ import com.kueski.marktest.databinding.MovieListItemBinding
 class MoviePagedListAdapter(private val movieClickListener: MovieClickListener?) :
     PagingDataAdapter<Movie, MoviePagedListAdapter.ViewHolder>(MovieDiffCallback()) {
 
+    private var viewType: AdapterViewType = AdapterViewType.LIST
+
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
         holder.bind(item, movieClickListener)
@@ -22,6 +24,11 @@ class MoviePagedListAdapter(private val movieClickListener: MovieClickListener?)
         viewType: Int
     ): ViewHolder {
         return ViewHolder.createViewHolder(parent)
+    }
+
+    fun setViewType(type: AdapterViewType) {
+        this.viewType = type
+        refresh()
     }
 
     class ViewHolder private constructor(private val binding: MovieListItemBinding) :
