@@ -5,11 +5,11 @@ import androidx.room.Room
 import com.kueski.marktest.api_client.MovieApiClientImpl
 import com.kueski.marktest.api_client.MoviesApiClient
 import com.kueski.marktest.business.repository.MoviesRepository
-import com.kueski.marktest.data.FavouriteMoviesDao
+import com.kueski.marktest.data.dao.FavouriteMoviesDao
 import com.kueski.marktest.data.KueskiDb
 import com.kueski.marktest.networking.AuthenticationInterceptor
 import com.kueski.marktest.networking.NetworkFactory
-import org.koin.core.module.Module
+import com.kueski.marktest.business.manager.FavouriteMoviesOpsManager
 import org.koin.dsl.module
 
 val repositories = module {
@@ -27,4 +27,8 @@ val database = module {
         Room.databaseBuilder(get<Context>(), KueskiDb::class.java, "kueskiTestDb").build()
     }
     single<FavouriteMoviesDao> { get<KueskiDb>().favouriteMoviesDao() }
+}
+
+val managers = module {
+    factory<FavouriteMoviesOpsManager> { FavouriteMoviesOpsManager(get<MoviesRepository>()) }
 }

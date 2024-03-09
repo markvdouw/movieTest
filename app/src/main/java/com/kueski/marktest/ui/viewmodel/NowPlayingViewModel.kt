@@ -1,7 +1,6 @@
-package com.kueski.marktest.ui.discovery
+package com.kueski.marktest.ui.viewmodel
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
@@ -11,10 +10,8 @@ import com.kueski.marktest.business.repository.MoviesRepository
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
 
-class MovieDiscoveryViewModel : ViewModel(), KoinComponent {
-
+class NowPlayingViewModel : ViewModel(), KoinComponent {
     private val moviesRepository = get<MoviesRepository>()
-
-    var movieList: LiveData<PagingData<Movie>> = moviesRepository.getMoviesDiscovery().cachedIn(viewModelScope)
-
+    var movieList: LiveData<PagingData<Movie>> =
+        moviesRepository.getNowPlayingMovies().cachedIn(viewModelScope)
 }

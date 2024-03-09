@@ -1,17 +1,16 @@
-package com.kueski.marktest.ui
+package com.kueski.marktest.ui.activity
 
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.view.View.OnClickListener
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.kueski.marktest.business.model.Movie
 import com.kueski.marktest.databinding.ActivityDetailBinding
-import com.kueski.marktest.databinding.ActivityMainBinding
-import com.kueski.marktest.ui.discovery.MovieDiscoveryViewModel
+import com.kueski.marktest.ui.viewmodel.DetailViewModel
+import com.kueski.marktest.ui.adapter.MovieClickListener
 import kotlinx.coroutines.launch
 
 class MovieDetailActivity : AppCompatActivity(), MovieClickListener {
@@ -37,15 +36,34 @@ class MovieDetailActivity : AppCompatActivity(), MovieClickListener {
             if (it.hasExtra(MOVIE)) {
                 (it.getSerializableExtra(MOVIE) as Movie?)?.let {
                     binding.movie = it
+                    lifecycleScope.launch {
+                        viewModel.setFavouriteMovieState(it.id!!)
+                    }
                 }
             }
         }
         binding.clickListener = this
+        viewModel.isFavouriteMovie.let {
+            it.observe(this) {
+                setFavouriteButtonText(isFavourite = it)
+            }
+        }
+    }
+
+    private fun setFavouriteButtonText(isFavourite: Boolean?) {
+        with(binding.markFavourite) {
+            isFavourite?.let {
+                text = if (it) "DELETE" else "ADD"
+                visibility = View.VISIBLE
+            } ?: run {
+                visibility = View.GONE
+            }
+        }
     }
 
     override fun movieClicked(movie: Movie) {
         lifecycleScope.launch {
-            binding.movie = viewModel.addFavourite(movie)
+            viewModel.onFavouriteButtonClicked(movie)
         }
     }
 

@@ -1,7 +1,7 @@
 package com.kueski.marktest.business.model
 
-import android.os.Parcelable
-import com.kueski.marktest.data.MovieEntity
+import com.kueski.marktest.data.entities.MovieEntity
+import com.kueski.marktest.helpers.round
 import java.io.Serializable
 
 class Movie private constructor(builder: Builder) : Serializable {
@@ -23,15 +23,6 @@ class Movie private constructor(builder: Builder) : Serializable {
         private set
     var voteAvg: Float? = null
         private set
-    var favourite: Boolean = false
-        private set
-
-    fun markFavourite(favourite: Boolean): Movie {
-        this.favourite
-        return this
-    }
-
-    fun getFavouriteStatus() : String = if(favourite) "FAVOURITE: TRUE" else "FAVOURITE: FALSE"
 
     init {
         id = builder.id
@@ -43,29 +34,27 @@ class Movie private constructor(builder: Builder) : Serializable {
             null
         }
         overview = builder.overview
-        popularity = builder.popularity
+        popularity = builder.popularity?.round(2)
         date = builder.date
         language = builder.language
-        voteAvg = builder.voteAvg
-        favourite = builder.favourite
+        voteAvg = builder.voteAvg?.round(2)
     }
 
     fun toEntity(): MovieEntity? {
         if (!isValid()) {
             return null
         }
-        val strGenres = genres?.joinToString { ", " }
+        val strGenres = genres?.joinToString(",")
         return MovieEntity(
             id!!,
             name!!,
             poster,
             strGenres,
             overview,
-            popularity,
+            popularity?.round(2),
             date,
             language,
-            voteAvg,
-            favourite
+            voteAvg?.round(2)
         )
     }
 

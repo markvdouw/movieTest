@@ -1,16 +1,15 @@
-package com.kueski.marktest.ui.discovery
+package com.kueski.marktest.ui.features.pagination
 
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.kueski.marktest.api_client.MoviesApiClient
 import com.kueski.marktest.business.model.Movie
-import com.kueski.marktest.di.repositories
-import com.kueski.marktest.services.MovieService
 
 
 @ExperimentalPagingApi
-class MovieDiscoveryPagingSource(private val moviesApiClient: MoviesApiClient) : PagingSource<Int, Movie>() {
+class MovieDiscoveryPagingSource(private val moviesApiClient: MoviesApiClient) :
+    PagingSource<Int, Movie>() {
     companion object {
         private const val STARTING_PAGE = 1
     }
@@ -28,10 +27,10 @@ class MovieDiscoveryPagingSource(private val moviesApiClient: MoviesApiClient) :
             )
         } catch (exception: Exception) {
             return LoadResult.Error(exception)
-    }
+        }
     }
 
-        override fun getRefreshKey(state: PagingState<Int, Movie>): Int? {
+    override fun getRefreshKey(state: PagingState<Int, Movie>): Int? {
         return state.anchorPosition?.let { anchorPosition ->
             val anchorPage = state.closestPageToPosition(anchorPosition)
             anchorPage?.prevKey?.plus(1) ?: anchorPage?.nextKey?.minus(1)

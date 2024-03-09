@@ -8,9 +8,9 @@ import androidx.paging.PagingData
 import androidx.paging.liveData
 import com.kueski.marktest.api_client.MoviesApiClient
 import com.kueski.marktest.business.model.Movie
-import com.kueski.marktest.data.FavouriteMoviesDao
-import com.kueski.marktest.ui.discovery.MovieDiscoveryPagingSource
-import com.kueski.marktest.ui.favourite_movies.FavouriteMoviesPagingSource
+import com.kueski.marktest.data.dao.FavouriteMoviesDao
+import com.kueski.marktest.ui.features.pagination.MovieDiscoveryPagingSource
+import com.kueski.marktest.ui.features.pagination.NowPlayingMoviesPagingSource
 
 class MoviesRepository(
     private val moviesApiClient: MoviesApiClient,
@@ -30,37 +30,22 @@ class MoviesRepository(
     @OptIn(ExperimentalPagingApi::class)
     fun getNowPlayingMovies(pageSize: Int? = null): LiveData<PagingData<Movie>> {
         return Pager(config = getPagingConfig(pageSize),
-            pagingSourceFactory = { MovieDiscoveryPagingSource(moviesApiClient) }).liveData
+            pagingSourceFactory = { NowPlayingMoviesPagingSource(moviesApiClient) }).liveData
     }
 
-    @OptIn(ExperimentalPagingApi::class)
-    fun getFavouriteMovies(pageSize: Int = 30): LiveData<PagingData<Movie>> {
-        return Pager(config = getPagingConfig(pageSize),
-            pagingSourceFactory = { FavouriteMoviesPagingSource(moviesDao) }).liveData
+    suspend fun getFavouriteMovies(): List<Movie> =
+        moviesDao.getFavouriteMovies().map { it.toBusiness() }
 
-//        return try {
-//            moviesDao.getFavouriteMovies(limit, offset).map { it.toBusiness() }
-//        } catch (e: Exception) {
-//            emptyList()
-//        }
-    }
+    suspend fun getFavouriteMovieById(movieId: Int): Movie? =
+        moviesDao.getFavouriteMovieById(movieId)?.toBusiness()
 
-    suspend fun markFavourite(movie: Movie): Movie {
-        if (movie.favourite) {
-            deleteFromFavouriteTable(movie.id)
-        } else {
-            addToFavouriteTable(movie)
-        }
-        return movie.markFavourite(!movie.favourite)
-    }
-
-    private suspend fun addToFavouriteTable(movie: Movie) {
-        with(movie.markFavourite(true).toEntity()) {
+    suspend fun addFavouriteMovie(movie: Movie) {
+        with(movie.toEntity()) {
             this?.let { moviesDao.insertMovie(this) }
         }
     }
 
-    private suspend fun deleteFromFavouriteTable(id: Int?) {
+    suspend fun deleteFavouriteMovie(id: Int?) {
         id?.let { moviesDao.deleteMovie(it) }
     }
 

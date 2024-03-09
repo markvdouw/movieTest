@@ -13,7 +13,7 @@
 
         <variable
             name="clickListener"
-            type="com.kueski.marktest.ui.MovieClickListener" />
+            type="com.kueski.marktest.ui.adapter.MovieClickListener" />
 
     </data>
 
@@ -27,24 +27,16 @@
             android:id="@+id/movie_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="placeholder" />
-
-        <TextView
-            android:id="@+id/isFavourite"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:layout_below="@+id/movie_name"
-            android:layout_marginBottom="25dp"
-            android:text="@{movie.favouriteStatus}" />
+            android:text="@{movie.name}" />
 
         <Button
             android:id="@+id/mark_favourite"
             android:layout_width="150dp"
             android:layout_height="70dp"
+            android:visibility="gone"
             android:onClick="@{() -> clickListener.movieClicked(movie)}"
-            android:layout_below="@+id/isFavourite"
-            android:text="Mark Favourite" />
+            android:layout_below="@+id/movie_name"
+            />
 
 
     </RelativeLayout>

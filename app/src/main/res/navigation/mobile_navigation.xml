@@ -3,23 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/navigation_movie_list">
 
     <fragment
-        android:id="@+id/navigation_home"
-        android:name="com.kueski.marktest.ui.discovery.MovieDiscoveryFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_discovery" />
+        android:id="@+id/navigation_movie_list"
+        android:name="com.kueski.marktest.ui.fragment.MovieDiscoveryFragment"
+        android:label="@string/title_movie_list"
+        tools:layout="@layout/fragment_movie_results" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.kueski.marktest.ui.now_playing.NowPlayingFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_now_playing" />
+        android:id="@+id/navigation_now_playing"
+        android:name="com.kueski.marktest.ui.fragment.NowPlayingFragment"
+        android:label="@string/title_now_playing"
+        tools:layout="@layout/fragment_movie_results" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.kueski.marktest.ui.favourite_movies.FavouriteFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_favourites" />
+        android:id="@+id/navigation_favourite"
+        android:name="com.kueski.marktest.ui.fragment.FavouriteFragment"
+        android:label="@string/title_favourite_movies"
+        tools:layout="@layout/fragment_movie_results" />
 </navigation>

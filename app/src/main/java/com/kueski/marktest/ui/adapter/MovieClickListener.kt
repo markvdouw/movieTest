@@ -1,4 +1,4 @@
-package com.kueski.marktest.ui
+package com.kueski.marktest.ui.adapter
 
 import com.kueski.marktest.business.model.Movie
 

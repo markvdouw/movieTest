@@ -1,8 +1,10 @@
 package com.kueski.marktest.helpers
 
-import java.text.SimpleDateFormat
-import java.util.Date
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
-fun Long.formatDate() = SimpleDateFormat("yyyy-MM-dd").format(Date(this))
+fun getNowMinus(days: Long = 7): String {
+    return LocalDate.now().minusDays(days).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+}
 
-fun Boolean.favouriteToString() = if(this) "FAVOURITE: TRUE" else "FAVOURITE: FALSE"
+fun Float.round(decimals: Int = 2): Float = "%.${decimals}f".format(this).toFloat()

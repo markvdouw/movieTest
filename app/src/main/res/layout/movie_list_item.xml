@@ -13,17 +13,16 @@
 
         <variable
             name="clickListener"
-            type="com.kueski.marktest.ui.MovieClickListener" />
+            type="com.kueski.marktest.ui.adapter.MovieClickListener" />
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/company_card"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="80dp"
         android:layout_marginEnd="6dp"
         android:layout_margin="15dp"
-        android:background="?attr/selectableItemBackground"
         android:orientation="vertical"
         android:onClick="@{() -> clickListener.movieClicked(movie)}"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -54,9 +53,10 @@
 
         <TextView
             android:id="@+id/movie_name"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{movie.name}"
+            android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="@+id/movie_poster_cardView"
             app:layout_constraintStart_toStartOf="@+id/movie_poster_cardView"
             app:layout_constraintTop_toBottomOf="@+id/movie_poster_cardView"

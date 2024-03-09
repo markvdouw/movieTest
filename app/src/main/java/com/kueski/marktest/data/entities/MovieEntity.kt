@@ -1,8 +1,10 @@
-package com.kueski.marktest.data
+package com.kueski.marktest.data.entities
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.kueski.marktest.business.model.Movie
+import com.kueski.marktest.data.FAV_MOVIES_TABLE
+import com.kueski.marktest.helpers.round
 
 @Entity(tableName = FAV_MOVIES_TABLE)
 data class MovieEntity(
@@ -15,13 +17,12 @@ data class MovieEntity(
     val popularity: Float?,
     val date: String?,
     val language: String?,
-    val voteAvg: Float?,
-    val favourite: Boolean = false
+    val voteAvg: Float?
 ) {
     fun toBusiness(): Movie =
         Movie.Builder(id, name).withPoster(poster).withGenres(genres).withOverview(overview)
-            .withPopularity(popularity).withDate(date).withLanguage(language).withVoteAvg(voteAvg)
-            .withFavourite(favourite)
+            .withPopularity(popularity?.round(2)).withDate(date).withLanguage(language)
+            .withVoteAvg(voteAvg?.round(2))
             .build()
 
 }

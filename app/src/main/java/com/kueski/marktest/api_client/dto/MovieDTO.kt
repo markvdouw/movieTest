@@ -1,8 +1,8 @@
 package com.kueski.marktest.api_client.dto
 
-import androidx.room.util.joinIntoString
 import com.google.gson.annotations.SerializedName
 import com.kueski.marktest.business.model.Movie
+import com.kueski.marktest.helpers.round
 
 data class MovieDTO(
     @SerializedName("genre_ids") val genres: List<Int>?,
@@ -16,19 +16,19 @@ data class MovieDTO(
     @SerializedName("release_date") val date: String?
 ) {
 
-    fun isValid() = id != null && !name.isNullOrEmpty() && id!! > 0
+    fun isValid() = id != null && !name.isNullOrEmpty() && id > 0
 
     fun toBusiness(): Movie? {
         return if (!isValid()) {
             null
         } else {
-            Movie.Builder(id!!, name!!).withGenres(joinIntoString(genres))
+            Movie.Builder(id!!, name!!).withGenres(genres?.joinToString(","))
                 .withLanguage(language)
                 .withOverview(overview)
-                .withPopularity(popularity)
+                .withPopularity(popularity?.round(2))
                 .withPoster(poster)
                 .withDate(date)
-                .withVoteAvg(voteAvg).build()
+                .withVoteAvg(voteAvg?.round(2)).build()
         }
     }
 }
