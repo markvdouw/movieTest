@@ -4,7 +4,7 @@ import com.kueski.marktest.api_client.dto.MovieApiResponse
 import com.kueski.marktest.networking.NetworkFactory
 import com.kueski.marktest.services.MovieService
 
-class MovieApiClientImpl(networkFactory: NetworkFactory) : MoviesApiClient {
+open class MovieApiClientImpl(networkFactory: NetworkFactory) : MoviesApiClient {
 
     companion object {
         private const val MOVIE_DISCOVERY_CACHE = 5
@@ -14,7 +14,7 @@ class MovieApiClientImpl(networkFactory: NetworkFactory) : MoviesApiClient {
         networkFactory.createService(MovieService::class.java, MOVIE_DISCOVERY_CACHE)
     private val nowPlayingService = networkFactory.createService(MovieService::class.java)
 
-    override suspend fun getMovieDiscovery(page: Int, sortBy: String?): MovieApiResponse =
+    override suspend fun getMovieList(page: Int, sortBy: String?): MovieApiResponse =
         movieDiscoveryService.getMovieList(page, sortBy)
 
     override suspend fun getNowPlaying(page: Int, sortBy: String?): MovieApiResponse =

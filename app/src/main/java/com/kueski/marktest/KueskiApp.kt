@@ -5,6 +5,7 @@ import com.kueski.marktest.di.apiClient
 import com.kueski.marktest.di.database
 import com.kueski.marktest.di.managers
 import com.kueski.marktest.di.repositories
+import com.kueski.marktest.di.viewModels
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -19,7 +20,7 @@ class KueskiApp : Application() {
     private fun startDI() {
         startKoin {
             androidContext(this@KueskiApp)
-            modules(listOf(repositories, apiClient, database, managers))
+            modules(listOf(repositories, apiClient, database, managers, viewModels))
         }
     }
 }

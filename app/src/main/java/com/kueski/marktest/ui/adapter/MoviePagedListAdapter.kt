@@ -39,8 +39,8 @@ class MoviePagedListAdapter(private val movieClickListener: MovieClickListener?)
             if (item != null) {
                 binding.movie = item
             }
-
-            Glide.with(binding.root.context).load("$imageBaseUrl${item!!.poster}").into(binding.imageView);
+            Glide.with(binding.root.context).load("$imageBaseUrl${item!!.poster}")
+                .into(binding.imageView);
             movieClickListener?.let { binding.clickListener = it }
         }
 
@@ -51,10 +51,7 @@ class MoviePagedListAdapter(private val movieClickListener: MovieClickListener?)
                 return ViewHolder(binding)
             }
         }
-
-
     }
-
 
     class MovieDiffCallback : DiffUtil.ItemCallback<Movie>() {
         override fun areItemsTheSame(oldItem: Movie, newItem: Movie): Boolean {

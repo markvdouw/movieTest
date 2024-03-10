@@ -2,17 +2,19 @@ package com.kueski.marktest.ui.fragment
 
 import android.os.Bundle
 import android.view.View
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.kueski.marktest.ui.base.BaseMovieResultFragment
 import com.kueski.marktest.ui.viewmodel.MovieDiscoveryViewModel
 import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
 
 class MovieDiscoveryFragment : BaseMovieResultFragment<MovieDiscoveryViewModel>() {
 
+    private val viewModel: MovieDiscoveryViewModel by inject()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        onViewCreated(ViewModelProvider(this).get(MovieDiscoveryViewModel::class.java))
+        onViewCreated()
         viewModel.movieList?.let {
             it.observe(viewLifecycleOwner) {
                 movieListPagedAdapter.submitData(viewLifecycleOwner.lifecycle, it)

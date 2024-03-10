@@ -40,6 +40,10 @@ class Movie private constructor(builder: Builder) : Serializable {
         voteAvg = builder.voteAvg?.round(2)
     }
 
+    /**
+     * Converts a movie to an entity representation to used in the local db
+     * @return movie entity if valid, else null
+     */
     fun toEntity(): MovieEntity? {
         if (!isValid()) {
             return null
@@ -59,6 +63,14 @@ class Movie private constructor(builder: Builder) : Serializable {
     }
 
     fun isValid() = id != null && !name.isNullOrEmpty() && id!! > 0
+
+    override fun equals(other: Any?): Boolean {
+        return other?.let { it is Movie && it.id == this.id } ?: false
+    }
+
+    override fun hashCode(): Int {
+        return id.hashCode()
+    }
 
     class Builder() {
         constructor(id: Int, name: String) : this() {

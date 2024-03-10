@@ -9,8 +9,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.kueski.marktest.business.model.Movie
 import com.kueski.marktest.databinding.ActivityDetailBinding
-import com.kueski.marktest.ui.viewmodel.DetailViewModel
 import com.kueski.marktest.ui.adapter.MovieClickListener
+import com.kueski.marktest.ui.viewmodel.DetailViewModel
 import kotlinx.coroutines.launch
 
 class MovieDetailActivity : AppCompatActivity(), MovieClickListener {

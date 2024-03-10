@@ -2,24 +2,22 @@ package com.kueski.marktest.ui.fragment
 
 import android.os.Bundle
 import android.view.View
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.kueski.marktest.ui.base.BaseMovieResultFragment
 import com.kueski.marktest.ui.adapter.MovieListAdapter
+import com.kueski.marktest.ui.base.BaseMovieResultFragment
 import com.kueski.marktest.ui.viewmodel.FavouriteMoviesViewModel
 import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
 
 class FavouriteFragment : BaseMovieResultFragment<FavouriteMoviesViewModel>() {
 
-    val movieListAdapter = MovieListAdapter(this)
+    private val movieListAdapter = MovieListAdapter(this)
+    private val viewModel: FavouriteMoviesViewModel by inject()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        onViewCreated(
-            ViewModelProvider(this).get(FavouriteMoviesViewModel::class.java),
-            setAdapter = false
-        )
+        onViewCreated(setAdapter = false)
         binding?.sort?.visibility = View.GONE
         binding?.view?.visibility = View.GONE
         provideRecyclerView()?.let { recycler ->

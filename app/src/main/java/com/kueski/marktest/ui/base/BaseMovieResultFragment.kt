@@ -8,7 +8,6 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,14 +20,11 @@ import com.kueski.marktest.ui.adapter.AdapterSortingType
 import com.kueski.marktest.ui.adapter.AdapterViewType
 import com.kueski.marktest.ui.adapter.MovieClickListener
 import com.kueski.marktest.ui.adapter.MoviePagedListAdapter
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 
 abstract class BaseMovieResultFragment<VM : ViewModel> : Fragment(), MovieClickListener {
 
     protected var binding: FragmentMovieResultsBinding? = null
-    protected lateinit var viewModel: VM
     protected lateinit var movieListPagedAdapter: MoviePagedListAdapter
     private var itemViewType = AdapterViewType.LIST
     var sortBy = AdapterSortingType.NAME
@@ -46,8 +42,7 @@ abstract class BaseMovieResultFragment<VM : ViewModel> : Fragment(), MovieClickL
         return binding!!.root
     }
 
-    protected fun onViewCreated(viewModel: VM, setAdapter: Boolean = true) {
-        this.viewModel = viewModel
+    protected fun onViewCreated(setAdapter: Boolean = true) {
         binding?.clickListener = this
         if (setAdapter) {
             movieListPagedAdapter = MoviePagedListAdapter(this)

@@ -16,8 +16,16 @@ data class MovieDTO(
     @SerializedName("release_date") val date: String?
 ) {
 
+    /**
+     * Validate a movie based on id and name
+     * @return true if id is notnull and greater than 0 AND name is not null or empty, false in other case
+     */
     fun isValid() = id != null && !name.isNullOrEmpty() && id > 0
 
+    /**
+     * Convert a MovieDTO object used to parse data from service to business internal models
+     * @return movie
+     */
     fun toBusiness(): Movie? {
         return if (!isValid()) {
             null

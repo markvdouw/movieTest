@@ -2,18 +2,19 @@ package com.kueski.marktest.ui.fragment
 
 import android.os.Bundle
 import android.view.View
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.viewModelScope
 import com.kueski.marktest.ui.base.BaseMovieResultFragment
 import com.kueski.marktest.ui.viewmodel.NowPlayingViewModel
 import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
 
 class NowPlayingFragment : BaseMovieResultFragment<NowPlayingViewModel>() {
 
+    private val viewModel: NowPlayingViewModel by inject()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        onViewCreated(ViewModelProvider(this).get(NowPlayingViewModel::class.java))
+        onViewCreated()
         viewModel.movieList?.let {
             it.observe(viewLifecycleOwner) {
                 movieListPagedAdapter.submitData(viewLifecycleOwner.lifecycle, it)

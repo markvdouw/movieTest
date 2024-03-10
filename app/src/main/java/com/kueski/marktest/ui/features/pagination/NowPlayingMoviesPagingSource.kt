@@ -8,7 +8,7 @@ import com.kueski.marktest.business.model.Movie
 
 @ExperimentalPagingApi
 class NowPlayingMoviesPagingSource(
-    val moviesApiClient: MoviesApiClient,
+    private val moviesApiClient: MoviesApiClient,
     private val sortBy: String
 ) :
     PagingSource<Int, Movie>() {

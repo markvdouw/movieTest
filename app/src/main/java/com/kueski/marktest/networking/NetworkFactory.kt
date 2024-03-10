@@ -2,6 +2,7 @@ package com.kueski.marktest.networking
 
 import android.content.Context
 import com.google.gson.GsonBuilder
+import com.kueski.marktest.BuildConfig
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -30,7 +31,7 @@ class NetworkFactory(
 
     private fun getRetrofit(cache: Int?): Retrofit {
         val converter = GsonConverterFactory.create(GsonBuilder().setLenient().create())
-        return Retrofit.Builder().baseUrl("https://api.themoviedb.org/3/")
+        return Retrofit.Builder().baseUrl(BuildConfig.BASE_URL_V3)
             .client(getOkHttpClient(cache))
             .addConverterFactory(converter)
             .build()
