@@ -7,16 +7,20 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.Glide
+import com.kueski.marktest.BuildConfig
+import com.kueski.marktest.R
 import com.kueski.marktest.business.model.Movie
 import com.kueski.marktest.databinding.ActivityDetailBinding
 import com.kueski.marktest.ui.adapter.MovieClickListener
 import com.kueski.marktest.ui.viewmodel.DetailViewModel
 import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
 
 class MovieDetailActivity : AppCompatActivity(), MovieClickListener {
 
     private lateinit var binding: ActivityDetailBinding
-    private lateinit var viewModel: DetailViewModel
+    private val viewModel: DetailViewModel by inject()
 
     companion object {
         const val MOVIE = "movie"
@@ -29,13 +33,14 @@ class MovieDetailActivity : AppCompatActivity(), MovieClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(DetailViewModel::class.java)
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
         intent?.let {
             if (it.hasExtra(MOVIE)) {
                 (it.getSerializableExtra(MOVIE) as Movie?)?.let {
                     binding.movie = it
+                    Glide.with(binding.root.context).load("${BuildConfig.BASE_IMAGE_URL}${it.poster}")
+                        .placeholder(R.drawable.pic_placeholder).into(binding.image)
                     lifecycleScope.launch {
                         viewModel.setFavouriteMovieState(it.id!!)
                     }
@@ -70,7 +75,7 @@ class MovieDetailActivity : AppCompatActivity(), MovieClickListener {
     override fun toggleView() {
     }
 
-    override fun sort() {
+    override fun update(withSorting: Boolean) {
     }
 
 }

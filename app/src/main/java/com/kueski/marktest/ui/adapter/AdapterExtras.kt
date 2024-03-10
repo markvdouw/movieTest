@@ -1,7 +1,7 @@
 package com.kueski.marktest.ui.adapter
 
-enum class AdapterViewType {
-    GRID, LIST
+enum class AdapterViewType(val id: Int) {
+    GRID(2), LIST(2)
 }
 
 enum class AdapterSortingType(val sortBy: String) {

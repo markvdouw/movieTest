@@ -22,11 +22,13 @@ class NowPlayingFragment : BaseMovieResultFragment<NowPlayingViewModel>() {
         }
     }
 
-    override fun sort() {
+    override fun update(withSorting : Boolean) {
         viewLifecycleOwner.lifecycleScope.launch {
             binding?.progress?.visibility = View.VISIBLE
             binding?.moviesListRecyclerView?.visibility = View.GONE
-            changeSortingType()
+            if (withSorting) {
+                changeSortingType()
+            }
             viewModel.movieList?.let {
                 it.observe(viewLifecycleOwner) {
                     movieListPagedAdapter.submitData(viewLifecycleOwner.lifecycle, it)

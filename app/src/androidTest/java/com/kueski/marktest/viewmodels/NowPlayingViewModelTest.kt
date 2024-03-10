@@ -1,4 +1,4 @@
-package com.kueski.marktest
+package com.kueski.marktest.viewmodels
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.paging.PagingData

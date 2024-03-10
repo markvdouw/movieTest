@@ -20,24 +20,108 @@
     <RelativeLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingTop="?attr/actionBarSize">
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_marginBottom="20dp"
+            android:layout_height="220dp" />
 
         <TextView
             android:id="@+id/movie_name"
+            android:layout_below="@+id/image"
             android:layout_width="wrap_content"
+            android:textSize="22dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_marginBottom="4dp"
             android:layout_height="wrap_content"
             android:text="@{movie.name}" />
 
+        <TextView
+            android:id="@+id/movie_popularity"
+            android:layout_below="@+id/movie_name"
+            android:layout_width="wrap_content"
+            android:textSize="16dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_height="wrap_content"
+            android:text="@{movie.popularity.toString()}" />
+        <TextView
+            android:id="@+id/movie_vote"
+            android:layout_below="@+id/movie_popularity"
+            android:layout_width="wrap_content"
+            android:textSize="16dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:textColor="@color/black"
+            android:layout_marginBottom="20dp"
+            android:layout_height="wrap_content"
+            android:text="@{movie.voteAvg.toString()}" />
+
+        <TextView
+            android:id="@+id/movie_date"
+            android:layout_below="@+id/movie_vote"
+            android:layout_width="wrap_content"
+            android:textSize="18dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_marginBottom="2dp"
+            android:layout_height="wrap_content"
+            android:text="@{movie.date}" />
+        <TextView
+            android:id="@+id/movie_genres"
+            android:layout_below="@+id/movie_date"
+            android:layout_width="wrap_content"
+            android:textSize="16dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:textColor="@color/black"
+            android:layout_marginBottom="5dp"
+            android:layout_height="wrap_content"
+            android:text="@{movie.genres.toString()}" />
+
+        <TextView
+            android:id="@+id/movie_language"
+            android:layout_below="@+id/movie_genres"
+            android:layout_width="wrap_content"
+            android:textSize="18dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:textColor="@color/black"
+            android:layout_marginBottom="25dp"
+            android:layout_height="wrap_content"
+            android:text="@{movie.language.toString()}" />
+        <TextView
+            android:id="@+id/movie_overview"
+            android:layout_below="@+id/movie_genres"
+            android:layout_width="wrap_content"
+            android:textSize="12dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:maxLines="10"
+            android:textColor="@color/black"
+            android:layout_marginBottom="30dp"
+            android:layout_height="wrap_content"
+            android:text="@{movie.overview}" />
+
         <Button
             android:id="@+id/mark_favourite"
-            android:layout_width="150dp"
+            android:layout_width="250dp"
             android:layout_height="70dp"
-            android:visibility="gone"
+            android:textColor="@color/white"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/movie_overview"
             android:onClick="@{() -> clickListener.movieClicked(movie)}"
-            android:layout_below="@+id/movie_name"
-            />
-
+            android:visibility="visible" />
 
     </RelativeLayout>
 </layout>

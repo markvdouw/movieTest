@@ -1,9 +1,10 @@
-package com.kueski.marktest
+package com.kueski.marktest.viewmodels
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.kueski.marktest.api_client.MovieApiClientImpl
 import com.kueski.marktest.business.repository.MoviesRepository
 import com.kueski.marktest.data.dao.FavouriteMoviesDao
+import com.kueski.marktest.getMovie
 import com.kueski.marktest.helpers.getOrAwaitValue
 import com.kueski.marktest.ui.viewmodel.FavouriteMoviesViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi

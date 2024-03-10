@@ -38,6 +38,10 @@ class FavouriteFragment : BaseMovieResultFragment<FavouriteMoviesViewModel>() {
 
     override fun onResume() {
         super.onResume()
+        update(false)
+    }
+
+    override fun update(withSorting: Boolean) {
         lifecycleScope.launch {
             viewModel.getFavouriteMovies()
             binding?.progress?.visibility = View.VISIBLE
@@ -45,7 +49,5 @@ class FavouriteFragment : BaseMovieResultFragment<FavouriteMoviesViewModel>() {
         }
     }
 
-    override fun sort() {
 
-    }
 }

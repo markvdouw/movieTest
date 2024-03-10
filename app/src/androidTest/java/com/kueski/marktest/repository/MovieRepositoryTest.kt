@@ -1,8 +1,9 @@
-package com.kueski.marktest
+package com.kueski.marktest.repository
 
 import com.kueski.marktest.api_client.MovieApiClientImpl
 import com.kueski.marktest.business.repository.MoviesRepository
 import com.kueski.marktest.data.dao.FavouriteMoviesDao
+import com.kueski.marktest.getMovie
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Before

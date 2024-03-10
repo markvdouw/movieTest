@@ -1,10 +1,11 @@
-package com.kueski.marktest
+package com.kueski.marktest.viewmodels
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.kueski.marktest.api_client.MovieApiClientImpl
 import com.kueski.marktest.business.manager.FavouriteMoviesOpsManager
 import com.kueski.marktest.business.repository.MoviesRepository
 import com.kueski.marktest.data.dao.FavouriteMoviesDao
+import com.kueski.marktest.getMovie
 import com.kueski.marktest.helpers.getOrAwaitValue
 import com.kueski.marktest.ui.viewmodel.DetailViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -18,7 +19,6 @@ import org.mockito.Mockito
 import org.mockito.Mockito.times
 import org.mockito.MockitoAnnotations
 import org.mockito.junit.MockitoJUnitRunner
-import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 

@@ -1,15 +1,15 @@
-package com.kueski.marktest
+package com.kueski.marktest.manager
 
 import com.kueski.marktest.api_client.MovieApiClientImpl
 import com.kueski.marktest.business.manager.FavouriteMoviesOpsManager
 import com.kueski.marktest.business.repository.MoviesRepository
 import com.kueski.marktest.data.dao.FavouriteMoviesDao
+import com.kueski.marktest.getMovie
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.BDDMockito.given
-import org.mockito.BDDMockito.verify
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.Mockito.times

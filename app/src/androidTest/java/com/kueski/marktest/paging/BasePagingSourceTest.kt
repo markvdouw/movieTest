@@ -1,17 +1,15 @@
-package com.kueski.marktest
+package com.kueski.marktest.paging
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.PagingSource
 import com.kueski.marktest.api_client.MovieApiClientImpl
 import com.kueski.marktest.api_client.dto.MovieApiResponse
-import com.kueski.marktest.api_client.dto.MovieDTO
 import com.kueski.marktest.business.model.Movie
-import com.kueski.marktest.ui.features.pagination.MovieListPagingSource
+import com.kueski.marktest.getMovie
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.Rule
 import org.junit.runner.RunWith
-import org.mockito.BDDMockito
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 import org.mockito.junit.MockitoJUnitRunner

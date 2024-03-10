@@ -1,9 +1,10 @@
-package com.kueski.marktest
+package com.kueski.marktest.paging
 
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.PagingSource
 import com.kueski.marktest.api_client.MovieApiClientImpl
 import com.kueski.marktest.business.model.Movie
+import com.kueski.marktest.paging.BasePagingSourceTest
 import com.kueski.marktest.ui.features.pagination.NowPlayingMoviesPagingSource
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest

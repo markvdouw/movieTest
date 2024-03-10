@@ -35,7 +35,7 @@
                     android:layout_height="35dp"
                     android:layout_alignParentEnd="true"
                     android:elevation="1dp"
-                    android:onClick="@{() -> clickListener.sort()}"
+                    android:onClick="@{() -> clickListener.update(true)}"
                     android:src="@drawable/sort" />
 
                 <ImageView

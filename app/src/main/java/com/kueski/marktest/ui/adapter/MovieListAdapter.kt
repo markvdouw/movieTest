@@ -4,18 +4,23 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewbinding.ViewBinding
+import com.bumptech.glide.Glide
+import com.kueski.marktest.BuildConfig
+import com.kueski.marktest.R
 import com.kueski.marktest.business.model.Movie
+import com.kueski.marktest.databinding.MovieGridItemBinding
 import com.kueski.marktest.databinding.MovieListItemBinding
 
 class MovieListAdapter(private val movieClickListener: MovieClickListener?) :
-    RecyclerView.Adapter<MovieListAdapter.ViewHolder>() {
+    RecyclerView.Adapter<ViewHolder>() {
 
     private var items = listOf<Movie>()
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): ViewHolder {
-        return ViewHolder.createViewHolder(parent)
+        return ViewHolder.createViewHolder(parent, AdapterViewType.LIST)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -30,21 +35,4 @@ class MovieListAdapter(private val movieClickListener: MovieClickListener?) :
         notifyDataSetChanged()
     }
 
-    class ViewHolder private constructor(private val binding: MovieListItemBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: Movie?, movieClickListener: MovieClickListener?) {
-            if (item != null) {
-                binding.movie = item
-            }
-            movieClickListener?.let { binding.clickListener = it }
-        }
-
-        companion object {
-            fun createViewHolder(parent: ViewGroup): ViewHolder {
-                val layoutInflater = LayoutInflater.from(parent.context)
-                val binding = MovieListItemBinding.inflate(layoutInflater, parent, false)
-                return ViewHolder(binding)
-            }
-        }
-    }
 }

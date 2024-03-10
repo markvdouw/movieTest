@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.paging.LoadState
+import androidx.paging.PagingData
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -45,7 +46,7 @@ abstract class BaseMovieResultFragment<VM : ViewModel> : Fragment(), MovieClickL
     protected fun onViewCreated(setAdapter: Boolean = true) {
         binding?.clickListener = this
         if (setAdapter) {
-            movieListPagedAdapter = MoviePagedListAdapter(this)
+            movieListPagedAdapter = MoviePagedListAdapter(this, itemViewType)
             provideRecyclerView()?.let { recycler ->
                 recycler.apply {
                     layoutManager = LinearLayoutManager(context)
@@ -70,6 +71,7 @@ abstract class BaseMovieResultFragment<VM : ViewModel> : Fragment(), MovieClickL
                         }
 
                         is LoadState.Error -> {
+                            //The kueski error could be either used directly or mapped to a UI error
                             Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
                         }
                     }
@@ -106,11 +108,13 @@ abstract class BaseMovieResultFragment<VM : ViewModel> : Fragment(), MovieClickL
             } else {
                 LinearLayoutManager(context)
             }
-            (it.adapter as MoviePagedListAdapter).setViewType(itemViewType)
             val imageResource =
                 if (itemViewType == AdapterViewType.GRID) R.drawable.list else R.drawable.grid
             binding?.view?.setImageResource(imageResource)
+            this.movieListPagedAdapter = MoviePagedListAdapter(this, itemViewType)
+            it.adapter = this.movieListPagedAdapter
         }
+        update(false)
     }
 
     override fun onDestroyView() {
